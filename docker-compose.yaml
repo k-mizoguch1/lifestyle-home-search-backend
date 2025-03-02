@@ -1,0 +1,28 @@
+services:
+  app:
+    image: node:20.16.0
+    working_dir: /app
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    command: sh -c "npm ci && npm run start:dev"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    driver: local
