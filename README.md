@@ -30,9 +30,32 @@
 
 ## Installation
 
+### Docker インストール
+- docker install : https://docs.docker.com/engine/install/ubuntu/
+- docker compose install : https://docs.docker.com/compose/install/linux/
+
+### 
 ```bash
-$ npm install
+コンテナ起動
+$ docker-compose up -d 
 ```
+
+```bash
+コンテナ内に入る
+$ docker-compose exec app bash
+```
+（コンテナ内で）以下を順に実行
+```bash
+依存モジュールインストール
+$ npm install
+データベース構築
+$ npm run typeorm -- migration:run
+./public/data.csvをデータベースに反映
+$ npm run import:csv
+
+
+```
+
 
 ## Running the app
 
