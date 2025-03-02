@@ -9,29 +9,36 @@ The **Homes API** allows users to search for properties based on various criteri
 ## Base URL
 
 ```
-http://your-api-domain.com/homes
+http://localhost:3000
 ```
 
 ## Endpoints
 
-### **1. Get Homes List**
+### **1. Get Homes Info**
+
+#### **Endpoint:**
+```
+GET /homes/{home_id}：物件IDをもとに物件情報を取得
+```
+
+### **2. Get Home List**
 
 #### **Endpoint:**
 
 ```
-GET /homes
+GET /homes：以下のクエリパラメータを条件に該当物件を検索
 ```
 
 #### **Query Parameters:**
 
 | Parameter   | Type              | Description                                        |
 | ----------- | ----------------- | -------------------------------------------------- |
-| `cities`    | `string[]`        | List of cities to filter (comma-separated)         |
+| `cities`    | `string[]`        | List of cities to filter (comma-separated) 市区町村名をカンマ区切りで指定|
 | `max_rent`  | `number`          | Maximum rent value                                 |
 | `min_rent`  | `number`          | Minimum rent value                                 |
-| `layouts`   | `Layout[]`        | List of layouts to filter (comma-separated)        |
+| `layouts`   | `Layout[]`        | List of layouts to filter (comma-separated) レイアウトをカンマ区切りで指定|
 | `year`      | `number`          | Year of construction                               |
-| `buildings` | `BUILDING_TYPE[]` | List of building types to filter (comma-separated) |
+| `buildings` | `BUILDING_TYPE[]` | List of building types to filter (comma-separated) 物件種別をカンマ区切りで指定|
 
 #### **Example Request:**
 
@@ -45,7 +52,7 @@ GET /homes?cities=Tokyo,Osaka&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&y
 [
   {
     "id": 1,
-    "city": "Tokyo",
+    "city": "墨田区",
     "rent": 95000,
     "layout": "1LDK",
     "year": 2020,
@@ -54,7 +61,7 @@ GET /homes?cities=Tokyo,Osaka&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&y
   },
   {
     "id": 2,
-    "city": "Osaka",
+    "city": "福岡市",
     "rent": 80000,
     "layout": "2LDK",
     "year": 2019,
@@ -68,7 +75,6 @@ GET /homes?cities=Tokyo,Osaka&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&y
 
 - `cities`, `layouts`, and `buildings` should be comma-separated lists.
 - `max_rent` and `min_rent` should be numerical values.
-- `year` should be a valid 4-digit number.
 - The API supports searching across multiple cities, layouts, and building types.
 
 ## Technologies Used
