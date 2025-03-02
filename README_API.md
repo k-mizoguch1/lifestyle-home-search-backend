@@ -46,6 +46,33 @@ GET /homes：以下のクエリパラメータを条件に該当物件を検索
 GET /homes?cities=墨田区,福岡市&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&year=2020&buildings=アパート,マンション
 ```
 
+```JavaScript
+const fetchHomes = async () => {
+      try {
+        const queryParams = new URLSearchParams({
+          cities: '墨田区,福岡市',
+          max_rent: '100000',
+          min_rent: '50000',
+          layouts: '1LDK,2LDK',
+          year: '2020',
+          buildings: 'アパート,マンション'
+        }).toString();
+
+        const response = await fetch(`http://your-api-domain.com/homes?${queryParams}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch homes');
+        }
+        const data = await response.json();
+        setHomes(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+```
+
 #### **Example Response:**
 
 ```json
