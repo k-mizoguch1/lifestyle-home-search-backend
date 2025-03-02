@@ -34,7 +34,7 @@
 - docker install : https://docs.docker.com/engine/install/ubuntu/
 - docker compose install : https://docs.docker.com/compose/install/linux/
 
-### 
+### 開発サーバ起動
 ```bash
 コンテナ起動
 $ docker-compose up -d 
@@ -53,46 +53,48 @@ $ npm run typeorm -- migration:run
 ./public/data.csvをデータベースに反映
 $ npm run import:csv
 
-
 ```
 
+### APIテスト
+Bearerで認証機能を実装しているため，各APIを実行するためにBearer Tokenが必要
 
-## Running the app
-
+以下のようにsignUpのAPIを実行し，ユーザを登録し，アクセストークを取得
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+curl -X POST http://localhost:3000/auth/signUp
+-H "Content-Type: application/json"
+-d '{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "password"
+}'
 ```
 
-## Test
-
+レスポンス例
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTc0MDkxNzc0NCwiZXhwIjoxNzQwOTIxMzQ0fQ.JhtjSyLc9kqoedJfaO9kJuH6rtBDnh6dhNOBfcV1xgs"}
 ```
 
-## Support
+すでにユーザがある場合はログイン
+```bash
+curl -X POST "http://localhost:3000/auth/login" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "username": "testuser",
+           "password": "password"
+         }'
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+取得したアクセストークンを以下に記述して，GET /users/meを実行テスト
+```bash
+curl -X GET "http://localhost:3000/users/me"
+  -H "Content-Type: application/json"
+  -H "Authorization: Bearer [ここにアクセストークンを記述]"
+```
 
-## License
+レスポンス例
+```bash
+{"id":2,"name":"testuser","email":"testuser@example.com","created_at":"2025-03-02T12:15:44.334Z","updated_at":"2025-03-02T12:15:44.334Z"}
+```
 
-Nest is [MIT licensed](LICENSE).
