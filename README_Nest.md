@@ -30,75 +30,46 @@
 
 ## Installation
 
-### envファイルの設定
-「.env.example」をコピーして，「.env」というファイルを作成
-
-### Docker インストール
-- docker install : https://docs.docker.com/engine/install/ubuntu/
-- docker compose install : https://docs.docker.com/compose/install/linux/
-
-### 開発サーバ起動
 ```bash
-コンテナ起動
-$ docker-compose up -d 
-```
-
-```bash
-コンテナ内に入る
-$ docker-compose exec app bash
-```
-（コンテナ内で）以下を順に実行
-```bash
-依存モジュールインストール
 $ npm install
-データベース構築
-$ npm run typeorm -- migration:run
-./public/data.csvをデータベースに反映
-$ npm run import:csv
-
 ```
 
-### APIテスト
-#### 認証（アクセストークン取得）
-Bearerで認証機能を実装しているため，各APIを実行するためにBearer Tokenが必要
+## Running the app
 
-以下のようにsignUpのAPIを実行し，ユーザを登録し，アクセストークを取得
 ```bash
-curl -X POST http://localhost:3000/auth/signUp
--H "Content-Type: application/json"
--d '{
-  "username": "testuser",
-  "email": "testuser@example.com",
-  "password": "password"
-}'
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
 
-レスポンス例
+## Test
+
 ```bash
-{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTc0MDkxNzc0NCwiZXhwIjoxNzQwOTIxMzQ0fQ.JhtjSyLc9kqoedJfaO9kJuH6rtBDnh6dhNOBfcV1xgs"}
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
 ```
 
-すでにユーザがある場合はログイン
-```bash
-curl -X POST "http://localhost:3000/auth/login" \
-     -H "Content-Type: application/json" \
-     -d '{
-           "username": "testuser",
-           "password": "password"
-         }'
-```
+## Support
 
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-#### トークンを使用してAPI実行
-取得したアクセストークンを以下に記述して，GET /users/meを実行テスト
-```bash
-curl -X GET "http://localhost:3000/users/me"
-  -H "Content-Type: application/json"
-  -H "Authorization: Bearer [ここにアクセストークンを記述]"
-```
+## Stay in touch
 
-レスポンス例
-```bash
-{"id":2,"name":"testuser","email":"testuser@example.com","created_at":"2025-03-02T12:15:44.334Z","updated_at":"2025-03-02T12:15:44.334Z"}
-```
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
+## License
+
+Nest is [MIT licensed](LICENSE).
