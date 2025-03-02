@@ -43,7 +43,7 @@ GET /homes：以下のクエリパラメータを条件に該当物件を検索
 #### **Example Request:**
 
 ```
-GET /homes?cities=Tokyo,Osaka&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&year=2020&buildings=Apartment,Condo
+GET /homes?cities=墨田区,福岡市&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&year=2020&buildings=アパート,マンション
 ```
 
 #### **Example Response:**
@@ -56,7 +56,7 @@ GET /homes?cities=Tokyo,Osaka&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&y
     "rent": 95000,
     "layout": "1LDK",
     "year": 2020,
-    "building": "Apartment",
+    "building": "アパート",
     "created_at": "2024-02-25T12:00:00Z"
   },
   {
@@ -64,8 +64,8 @@ GET /homes?cities=Tokyo,Osaka&max_rent=100000&min_rent=50000&layouts=1LDK,2LDK&y
     "city": "福岡市",
     "rent": 80000,
     "layout": "2LDK",
-    "year": 2019,
-    "building": "Condo",
+    "year": 2020,
+    "building": "マンション",
     "created_at": "2024-02-20T10:30:00Z"
   }
 ]
