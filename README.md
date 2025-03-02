@@ -30,6 +30,9 @@
 
 ## Installation
 
+### envファイルの設定
+「.env.example」をコピーして，「.env」というファイルを作成
+
 ### Docker インストール
 - docker install : https://docs.docker.com/engine/install/ubuntu/
 - docker compose install : https://docs.docker.com/compose/install/linux/
@@ -56,6 +59,7 @@ $ npm run import:csv
 ```
 
 ### APIテスト
+#### 認証（アクセストークン取得）
 Bearerで認証機能を実装しているため，各APIを実行するためにBearer Tokenが必要
 
 以下のようにsignUpのAPIを実行し，ユーザを登録し，アクセストークを取得
@@ -85,7 +89,7 @@ curl -X POST "http://localhost:3000/auth/login" \
 ```
 
 
-
+#### トークンを使用してAPI実行
 取得したアクセストークンを以下に記述して，GET /users/meを実行テスト
 ```bash
 curl -X GET "http://localhost:3000/users/me"
