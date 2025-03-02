@@ -108,7 +108,7 @@ const fetchHomes = async () => {
 
 - **NestJS** (Backend framework)
 - **TypeORM** (Database ORM)
-- **PostgreSQL/MySQL** (Database, depending on configuration)
+- **PostgreSQL (Database, depending on configuration)
 
 ## License
 
