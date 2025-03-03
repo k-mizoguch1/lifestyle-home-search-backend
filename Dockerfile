@@ -1,10 +1,10 @@
-# Node.jsのベースイメージ
+# Node.jsの公式イメージを使用
 FROM node:20.16.0
 
 # 作業ディレクトリの設定
 WORKDIR /app
 
-# package.json と package-lock.json をコピー
+# 依存関係をインストールするために package.json と package-lock.json をコピー
 COPY package*.json ./
 
 # 依存関係をインストール
@@ -13,8 +13,11 @@ RUN npm ci
 # アプリケーションのコードをコピー
 COPY . .
 
-# ポートの設定
+# TypeScript をビルド
+RUN npm run build
+
+# ポートを開放
 EXPOSE 3000
 
-# アプリを起動
-CMD ["npm", "run", "start:prod"]
+# プロダクション環境でアプリを実行
+CMD ["node", "dist/main"]
