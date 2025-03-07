@@ -39,6 +39,27 @@ export class Home {
   })
   building: BUILDING_TYPE;
 
+  @Column({ type: 'varchar', length: 255 })
+  location: string;
+
+  @Column()
+  heights: number;
+
+  @Column()
+  area: number;
+
+  @Column()
+  admin: number;
+
+  @Column()
+  deposit: number;
+
+  @Column({ type: 'varchar', length: 255 })
+  station_list: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  thumbnails: string;
+
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
