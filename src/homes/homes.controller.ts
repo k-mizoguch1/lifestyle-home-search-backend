@@ -37,8 +37,8 @@ export class HomesController {
   ) {
     return this.homesService.findAllByParam(
       cities ? (Array.isArray(cities) ? cities : cities.split(',')) : undefined,
-      max_rent && !isNaN(parseInt(max_rent)) ? parseInt(max_rent) : undefined,
-      min_rent && !isNaN(parseInt(min_rent)) ? parseInt(min_rent) : undefined,
+      max_rent !== undefined && max_rent !== null && !isNaN(parseInt(max_rent)) ? parseInt(max_rent) : undefined,
+      min_rent !== undefined && min_rent !== null && !isNaN(parseInt(min_rent)) ? parseInt(min_rent) : undefined,      
       layouts
         ? Array.isArray(layouts)
           ? layouts.map((l) => l as Layout)
