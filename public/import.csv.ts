@@ -41,6 +41,7 @@ async function importCSV() {
       home.area = parseInt(row.area);
       home.admin = parseInt(row.admin);
       home.deposit = parseInt(row.deposit);
+      home.photo_url = row.photo_url;
       home.station_list = row.station_list
       home.thumbnails = row.thumbnails;
       homes.push(home);

@@ -55,6 +55,9 @@ export class Home {
   deposit: number;
 
   @Column({ type: 'varchar', length: 255 })
+  photo_url: string;
+
+  @Column({ type: 'varchar', length: 255 })
   station_list: string;
 
   @Column({ type: 'varchar', length: 255 })
