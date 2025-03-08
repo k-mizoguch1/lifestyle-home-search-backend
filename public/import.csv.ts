@@ -5,7 +5,7 @@ import { Home } from '../src/homes/entities/home.entity';
 import { env } from 'process';
 import ormConfig from '../src/ormconfig'; // TypeORM の設定ファイル
 
-const CSV_FILE_PATH = 'public/data.csv'; // CSVファイルのパス
+const CSV_FILE_PATH = 'public/data2.csv'; // CSVファイルのパス
 const dataSource = new DataSource({
   type: 'postgres',
   host: env.DB_HOST,
@@ -36,6 +36,14 @@ async function importCSV() {
       home.layout = row.layout;
       home.year = parseInt(row.year);
       home.building = row.building;
+      home.location = row.location;
+      home.heights = parseInt(row.heights);
+      home.area = parseInt(row.area);
+      home.admin = parseInt(row.admin);
+      home.deposit = parseInt(row.deposit);
+      home.photo_url = row.photo_url;
+      home.station_list = row.station_list
+      home.thumbnails = row.thumbnails;
       homes.push(home);
     })
     .on('end', async () => {
