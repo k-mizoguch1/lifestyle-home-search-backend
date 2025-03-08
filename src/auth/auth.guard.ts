@@ -26,6 +26,11 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
 
+    // マスターBearerトークンが設定されていて、リクエストのトークンと一致する場合は認証不要
+    if (token && token === jwtConstants.masterToken) {
+      return true;
+    }
+
     if (token) {
       try {
         const payload = await this.jwtService.verifyAsync(token, {
