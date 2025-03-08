@@ -45,7 +45,9 @@ export class HomesService {
     // if (min_rent !== undefined) where.rent = MoreThanOrEqual(min_rent);
     if (max_rent && min_rent) where.rent = Between(min_rent, max_rent);
     if (layouts) where.layout = In(layouts);
-    if (year !== undefined) where.year = year;
+    // under yera
+    if (year) where.year = Between(0, year);
+    // if (year !== undefined) where.year = year;
     if (buildings) where.building = In(buildings);
 
     return await this.homesRepository.find({
